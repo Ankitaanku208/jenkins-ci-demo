@@ -34,11 +34,11 @@ docker-compose up --build
 docker-compose down
 ```
 
-### Heroku usage
+### Herokuusage
 Goof requires attaching a MongoLab service to be deployed as a Heroku app. 
 That sets up the MONGOLAB_URI env var so everything after should just work. 
 
-### CloudFoundry usage
+### Cloud Foundry usage
 Goof requires attaching a MongoLab service and naming it "goof-mongo" to be deployed on CloudFoundry. 
 The code explicitly looks for credentials to that service. 
 
@@ -76,9 +76,9 @@ Here are the exploitable vulnerable packages:
 
 #### Code injection
 
-The page at `/account_details` is rendered as an Handlebars view.
+The page at `/account_details` is rendered as a Handlebars view.
 
-The same view is used for both the GET request which shows the account details, as well as the form itself for a POST request which updates the account details. A so-called Server-side Rendering.
+The same view is used for both the GET request ,which shows the account details, as well as the form itself for a POST request which updates the account details. A so-called Server-side Rendering.
 
 The form is completely functional. The way it works is, it receives the profile information from the `req.body` and passes it, as-is to the template. This however means, that the attacker is able to control a variable that flows directly from the request into the view template library.
 
@@ -107,7 +107,7 @@ curl -X 'POST' -H 'Content-Type: application/json' --data-binary "{\"email\": \"
 
 #### NoSQL injection
 
-A POST request to `/login` will allow for authentication and signing-in to the system as an administrator user.
+A POST request to `/login` will allow for authentication and signing in to the system as an administrator user.
 It works by exposing `loginHandler` as a controller in `routes/index.js` and uses a MongoDB database and the `User.find()` query to look up the user's details (email as a username and password). One issue is that it indeed stores passwords in plaintext and not hashing them. However, there are other issues in play here.
 
 
@@ -146,7 +146,7 @@ http://localhost:3001/login?redirectPage="><script>alert(1)</script>
 
 To exploit the open redirect, simply provide a URL such as `redirectPage=https://google.com` which exploits the fact that the code doesn't enforce local URLs in `index.js:72`.
 
-#### Hardcoded values - session information
+#### Hardcoded values session information
 
 The application initializes a cookie-based session on `app.js:40` as follows:
 
