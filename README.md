@@ -146,7 +146,7 @@ http://localhost:3001/login?redirectPage="><script>alert(1)</script>
 
 To exploit the open redirect, simply provide a URL such as `redirectPage=https://google.com` which exploits the fact that the code doesn't enforce local URLs in `index.js:72`.
 
-#### Hardcoded values session information
+#### Hardcoded values for session information
 
 The application initializes a cookie-based session on `app.js:40` as follows:
 
